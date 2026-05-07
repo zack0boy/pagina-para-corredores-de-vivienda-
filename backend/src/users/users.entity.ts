@@ -1,28 +1,39 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
-import { Role } from '../common/enums/roles.enum';
+import { Entity, Column, PrimaryGeneratedColumn, PrimaryColumn } from 'typeorm';
 
-@Entity()
-export class Cliente {
-  @PrimaryGeneratedColumn()
-  id!: number;
+@Entity({ name: 'usuario' })
+export class Usuario {
+  @PrimaryGeneratedColumn({ name: 'id_usuario' })
+  idUsuario!: number;
 
-  @Column()
+  @Column({ name: 'nombre' })
   nombre!: string;
 
-  @Column({ unique: true })
+  @Column({ name: 'email' })
   email!: string;
 
-  @Column({ select: false })
+  @Column({ name: 'password' })
   password!: string;
 
-  @Column({
-    type: 'enum',
-    enum: Role,
-    default: Role.CLIENT,
-    enumName: 'user_role_enum',
-  })
-  role!: Role;
+  @Column({ name: 'rol' })
+  rol!: string;
 
-  @Column({ default: true })
-  isActive!: boolean;
+  @Column({
+    name: 'estado',
+    type: 'enum',
+    enum: ['activo', 'inactivo', 'pendiente'],
+    default: 'activo',
+  })
+  estado!: string;
+}
+
+@Entity({ name: 'cliente' })
+export class Cliente {
+  @PrimaryColumn({ name: 'id_usuario' })
+  idUsuario!: number;
+
+  @Column({ name: 'telefono', nullable: true })
+  telefono!: string;
+
+  @Column({ name: 'rut' })
+  rut!: string;
 }
