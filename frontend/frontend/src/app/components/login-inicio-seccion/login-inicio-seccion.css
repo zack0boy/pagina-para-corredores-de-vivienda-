@@ -1,0 +1,83 @@
+:host {
+    display: block;
+    width: 100%;
+}
+
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 350px;
+    height: 100vh;
+    margin-left: auto;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    background: white;
+}
+
+.email-container,
+.password-container {
+    width: 100%;
+    max-width: 300px;
+}
+
+.texto-title {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.texto-email {
+    display: block;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.texto-password {
+    display: block;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.input-email,
+.input-password {
+  width: 100%;
+  max-width: 300px;
+  padding: 0.4rem;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  box-sizing: border-box;
+}
+
+.inicio-btn {
+    width: 80%;
+    max-width: 300px;
+    padding: 0.5rem;
+    font-size: 1.2rem;
+    background-color: #0b488a;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.registro-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.texto-1 {
+    margin-top: 1rem;
+    font-size: 1.2rem;
+}
+.registro-link {
+    color: #0b488a;
+    text-decoration: none;
+    font-weight: bold;
+    margin-right: 1rem;
+    padding: 0.5rem;
+}
