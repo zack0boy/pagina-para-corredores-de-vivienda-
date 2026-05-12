@@ -1,33 +1,47 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
 import { UsersService } from '../users/users.service';
 
 @Injectable()
 export class AuthService {
-  constructor(private usersService: UsersService) {}
+  constructor(
+    private usersService: UsersService,
+    private jwtService: JwtService,
+  ) {}
 
- async login(email: string, password: string) {
-  console.log('EMAIL RECIBIDO:', email);
+  async googleLogin(req) {
+    if (!req.user) {
+      return 'No user from google';
+    }
 
-  const user = await this.usersService.findByEmail(email);
+    const googleUser = req.user;
 
-  console.log('USER ENCONTRADO:', user);
+    let user = await this.usersService.findByEmail(
+      googleUser.email,
+    );
 
-  if (!user) {
-    throw new UnauthorizedException('Credenciales inválidas');
-  }
+    if (!user) {
+      user = await this.usersService.create({
+        nombre: googleUser.nombre,
+        email: googleUser.email,
+        password: '',
+        rol: 'CLIENTE',
+        estado: 'activo',
+      });
+    }
 
-  if (user.password !== password) {
-    throw new UnauthorizedException('Credenciales inválidas');
-  }
-
-  return {
-    message: 'Login exitoso',
-    user: {
-      id: user.idUsuario,
+    const payload = {
+      sub: user.idUsuario,
       email: user.email,
-      role: user.rol,
-    },
-  };
-}
-  
+      rol: user.rol,
+    };
+
+    const token = this.jwtService.sign(payload);
+
+    return {
+      message: 'Login con Google exitoso',
+      access_token: token,
+      user,
+    };
+  }
 }

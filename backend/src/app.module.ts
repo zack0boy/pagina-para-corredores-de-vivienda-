@@ -10,7 +10,6 @@ import { PagosModule } from './pagos/pagos.module';
 import { PropietarioModule } from './propietario/propietario.module';
 import { AuthModule } from './auth/auth.module'; 
 import { UsersModule } from './users/users.module';
-import { AuthService } from './auth/auth.services';
   
 @Module({
   imports: [
@@ -33,6 +32,9 @@ import { AuthService } from './auth/auth.services';
       autoLoadEntities: true,
       synchronize: false, 
     }),
+    
+
+
   ],
   controllers: [AppController],
   providers: [AppService],
