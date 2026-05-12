@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { ConfigService } from '../../services/config.service';
 
 @Component({
   selector: 'app-login-inicio-seccion',
@@ -6,4 +7,7 @@ import { Component } from '@angular/core';
   templateUrl: './login-inicio-seccion.html',
   styleUrl: './login-inicio-seccion.css',
 })
-export class LoginInicioSeccion {}
+export class LoginInicioSeccion {
+  private configService = inject(ConfigService);
+  company = this.configService.getCompany();
+}
