@@ -1,33 +1,33 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
-import { UsersService } from '../users/users.service';
+import { OAuth2Client } from 'google-auth-library';
 
 @Injectable()
 export class AuthService {
-  constructor(private usersService: UsersService) {}
 
- async login(email: string, password: string) {
-  console.log('EMAIL RECIBIDO:', email);
+  private client = new OAuth2Client(
+    '957495637126-gpvoqbqfb1lrs4pf5fieph8pturvorlf.apps.googleusercontent.com'
+  );
 
-  const user = await this.usersService.findByEmail(email);
+  async googleLogin(token: string) {
 
-  console.log('USER ENCONTRADO:', user);
+    const ticket = await this.client.verifyIdToken({
+      idToken: token,
+      audience: '957495637126-gpvoqbqfb1lrs4pf5fieph8pturvorlf.apps.googleusercontent.com',
+    });
 
-  if (!user) {
-    throw new UnauthorizedException('Credenciales inválidas');
+    const payload = ticket.getPayload();
+
+    if (!payload) {
+      throw new UnauthorizedException();
+    }
+
+    return {
+      message: 'Login Google exitoso',
+      user: {
+        email: payload.email,
+        nombre: payload.name,
+        foto: payload.picture,
+      }
+    };
   }
-
-  if (user.password !== password) {
-    throw new UnauthorizedException('Credenciales inválidas');
-  }
-
-  return {
-    message: 'Login exitoso',
-    user: {
-      id: user.idUsuario,
-      email: user.email,
-      role: user.rol,
-    },
-  };
-}
-  
 }
