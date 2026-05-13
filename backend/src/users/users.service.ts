@@ -1,13 +1,15 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Usuario } from './users.entity';
+import { Usuario,UsersGoogle } from './users.entity';
 
 @Injectable()
 export class UsersService {
   constructor(
     @InjectRepository(Usuario)
     private readonly usuarioRepository: Repository<Usuario>,
+    @InjectRepository(UsersGoogle)
+    private readonly usersGoogleRepository: Repository<UsersGoogle>,
   ) {}
 
   findAll(): Promise<Usuario[]> {
@@ -38,4 +40,15 @@ export class UsersService {
 
     return this.usuarioRepository.save(user);
   }
+  async createGoogleUser(data: Partial<UsersGoogle>) {
+
+    const user = this.usersGoogleRepository.create(data);
+
+    return this.usersGoogleRepository.save(user);
+  }
+  async findGoogleUserByEmail(email: string) {
+  return this.usersGoogleRepository.findOne({
+    where: { email },
+  });
+}
 }

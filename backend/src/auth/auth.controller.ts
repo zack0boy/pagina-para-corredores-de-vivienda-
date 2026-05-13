@@ -3,7 +3,7 @@ import { AuthService } from './auth.services';
 
 @Controller('auth')
 export class AuthController {
-
+  //ruta para login con google POST http://localhost:3000/auth/google
   constructor(private authService: AuthService) {}
 
   @Post('google')
