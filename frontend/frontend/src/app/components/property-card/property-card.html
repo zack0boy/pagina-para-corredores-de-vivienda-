@@ -1,0 +1,79 @@
+<div class="property-grid">
+    <div
+        class="property-card"
+
+        *ngFor="let property of properties">
+
+        <div class="property-image-container">
+
+            <img
+                class="property-image"
+
+                [src]="property.image"
+
+                [alt]="property.title">
+
+        </div>
+
+        <div class="property-content">
+
+            <span class="property-type">
+                {{ property.type }}
+            </span>
+
+            <h2 class="property-price">
+                ${{ property.price | number }}
+            </h2>
+
+            <h3 class="property-title">
+                {{ property.title }}
+            </h3>
+
+            <p class="property-location">
+                {{ property.location }}
+            </p>
+
+            <div class="property-features">
+
+                <div class="feature-item">
+
+                    <span class="feature-label">
+                        m²
+                    </span>
+
+                    <p>
+                        {{ property.meters }}
+                    </p>
+
+                </div>
+
+                <div class="feature-item">
+
+                    <span class="feature-label">
+                        Dorm.
+                    </span>
+
+                    <p>
+                        {{ property.bedrooms }}
+                    </p>
+
+                </div>
+
+                <div class="feature-item">
+
+                    <span class="feature-label">
+                        Baños
+                    </span>
+
+                    <p>
+                        {{ property.bathrooms }}
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>

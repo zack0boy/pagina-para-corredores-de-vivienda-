@@ -1,0 +1,38 @@
+.footer {
+    border-top: 1px solid #dbe4ff;
+    padding: 40px 60px;
+    background-color: #ffffff;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.footer-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-width: 180px;
+}
+
+.footer-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: rgb(0, 16, 161);
+    margin-bottom: 10px;
+}
+
+.footer-text,
+.footer-link {
+    font-size: 15px;
+    color: #555;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.footer-link:hover {
+    color: rgb(0, 16, 161);
+}
