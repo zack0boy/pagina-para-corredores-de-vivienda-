@@ -1,0 +1,50 @@
+<div class="property-header">
+
+    <div class="property-header-info">
+
+        <h1 class="property-header-title">
+            Viviendas en Santiago
+        </h1>
+
+        <p class="property-header-subtitle">
+            Más de 250 opciones reales para tu familia
+        </p>
+
+    </div>
+
+    <div class="property-header-sort">
+
+        <p class="sort-label">
+            ORDENAR POR
+        </p>
+
+        <div class="sort-dropdown">
+
+            <button
+                class="sort-btn"
+                (click)="toggleDropdown()">
+
+                {{ selectedOption }}
+
+            </button>
+
+            <div
+                class="dropdown-menu"
+                *ngIf="isDropdownOpen">
+
+                <button
+                    class="dropdown-option"
+                    *ngFor="let option of sortOptions"
+                    (click)="selectOption(option)">
+
+                    {{ option }}
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
