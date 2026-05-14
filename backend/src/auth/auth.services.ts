@@ -2,6 +2,7 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { OAuth2Client } from 'google-auth-library';
 import { UsersService } from '../users/users.service';
 import { JwtService } from '@nestjs/jwt';
+import { Role } from '../common/enums/roles.enum';
 
 @Injectable()
 export class AuthService {
@@ -12,15 +13,14 @@ export class AuthService {
   ) {}
 
   private client = new OAuth2Client(
-    '957495637126-gpvoqbqfb1lrs4pf5fieph8pturvorlf.apps.googleusercontent.com'
+    process.env.GOOGLE_CLIENT_ID
   );
 
   async googleLogin(token: string) {
 
     const ticket = await this.client.verifyIdToken({
       idToken: token,
-      audience:
-        '957495637126-gpvoqbqfb1lrs4pf5fieph8pturvorlf.apps.googleusercontent.com',
+      audience: process.env.GOOGLE_CLIENT_ID,
     });
 
     const payload = ticket.getPayload();
@@ -42,7 +42,7 @@ export class AuthService {
         email: payload.email!,
         nombre: payload.name!,
         foto: payload.picture,
-        role: 'CLIENTE',
+        role: Role.CLIENT,
         estado: 'activo',
       });
 
