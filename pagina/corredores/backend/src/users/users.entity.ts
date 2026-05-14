@@ -71,3 +71,12 @@ export class Cliente {
   @Column({ name: 'rut' })
   rut!: string;
 }
+
+@Entity({ name: 'corredor' })
+export class Corredor {
+  @PrimaryColumn({ name: 'id_usuario' })
+  idUsuario!: number;
+  
+  @Column({ name: 'licencia_profesional' })
+  licenciaProfesional!: string;
+}
