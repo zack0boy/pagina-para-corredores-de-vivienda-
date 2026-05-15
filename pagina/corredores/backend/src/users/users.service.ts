@@ -1,7 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Usuario,UsersGoogle } from './users.entity';
+import { Usuario} from './entitys/usuario.entity';
+import { UsersGoogle } from './entitys/users_google.entity';
+import { Corredor } from './entitys/corredor.entity';
 
 @Injectable()
 export class UsersService {
@@ -10,6 +12,8 @@ export class UsersService {
     private readonly usuarioRepository: Repository<Usuario>,
     @InjectRepository(UsersGoogle)
     private readonly usersGoogleRepository: Repository<UsersGoogle>,
+    @InjectRepository(Corredor)
+    private readonly corredorRepository: Repository<Corredor>,
   ) {}
 
   findAll(): Promise<Usuario[]> {
@@ -50,5 +54,34 @@ export class UsersService {
   return this.usersGoogleRepository.findOne({
     where: { email },
   });
+}
+async assignCorredor(idUsuario: number) {
+
+  // actualizar rol
+  await this.usuarioRepository.update(
+    { idUsuario },
+    { rol: 'CORREDOR' },
+  );
+
+  // verificar si ya existe
+  const corredorExistente =
+    await this.corredorRepository.findOne({
+      where: { idUsuario },
+    });
+
+  if (!corredorExistente) {
+
+    const corredor =
+      this.corredorRepository.create({
+        idUsuario,
+        licenciaProfesional: 'PENDIENTE',
+      });
+
+    await this.corredorRepository.save(corredor);
+  }
+
+  return {
+    message: 'Usuario asignado como corredor',
+  };
 }
 }

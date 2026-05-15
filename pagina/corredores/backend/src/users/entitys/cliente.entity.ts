@@ -1,0 +1,15 @@
+import { Entity, Column, PrimaryGeneratedColumn, PrimaryColumn,OneToOne,JoinColumn, } from 'typeorm';
+import { Role } from '../../common/enums/roles.enum';
+
+@Entity({ name: 'cliente' })
+export class Cliente {
+  @PrimaryColumn({ name: 'id_usuario' })
+  idUsuario!: number;
+
+  @Column({ name: 'telefono', nullable: true })
+  telefono!: string;
+
+  @Column({ name: 'rut' })
+  rut!: string;
+}
+

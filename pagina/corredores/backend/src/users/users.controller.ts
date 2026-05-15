@@ -1,9 +1,17 @@
-import { Controller } from '@nestjs/common';
+import {Controller,Patch,Param,} from '@nestjs/common';
 import { UsersService } from './users.service';
-import { RolesGuard } from '../common/guard/roles.guard';
-import { UseGuards } from '@nestjs/common';
-import { Roles } from '../common/decorators/roles.decorators';
-import { Role } from '../common/enums/roles.enum';
+
 @Controller('users')
-export class UsersController {}
-    
+export class UsersController {
+
+  constructor(
+    private readonly usersService: UsersService,
+  ) {}
+
+  @Patch(':id/corredor')
+  assignCorredor(
+    @Param('id') id: string,
+  ) {
+    return this.usersService.assignCorredor(+id);
+  }
+}
