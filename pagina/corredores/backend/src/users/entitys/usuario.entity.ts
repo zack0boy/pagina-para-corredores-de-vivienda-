@@ -26,7 +26,7 @@ export class Usuario {
     default: 'activo',
   })
   estado!: string;
-  @OneToOne(() => Corredor, (corredor) => corredor.usuario)
+
   corredor!: Corredor;
 }
 

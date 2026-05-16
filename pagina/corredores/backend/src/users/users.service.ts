@@ -4,7 +4,7 @@ import { Repository } from 'typeorm';
 import { Usuario} from './entitys/usuario.entity';
 import { UsersGoogle } from './entitys/users_google.entity';
 import { Corredor } from './entitys/corredor.entity';
-
+import { Role } from '../common/enums/roles.enum';
 @Injectable()
 export class UsersService {
   constructor(
@@ -82,6 +82,38 @@ async assignCorredor(idUsuario: number) {
 
   return {
     message: 'Usuario asignado como corredor',
+  };
+}
+
+async assignCorredorGoogle(id: number) {
+
+  await this.usersGoogleRepository.update(
+    { id },
+    {
+      role: Role.CORREDOR,
+    },
+  );
+
+  const corredorExistente =
+    await this.corredorRepository.findOne({
+      where: {
+        idUsuario: id,
+      },
+    });
+
+  if (!corredorExistente) {
+
+    const corredor =
+      this.corredorRepository.create({
+        idUsuario: id,
+        licenciaProfesional: 'PENDIENTE',
+      });
+
+    await this.corredorRepository.save(corredor);
+  }
+
+  return {
+    message: 'Usuario Google asignado como corredor',
   };
 }
 }

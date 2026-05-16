@@ -14,4 +14,10 @@ export class UsersController {
   ) {
     return this.usersService.assignCorredor(+id);
   }
+  @Patch(':id/google/corredor')
+  assignCorredorGoogle(
+  @Param('id') id: string,
+  ) {
+  return this.usersService.assignCorredorGoogle(+id);
+}
 }

@@ -1,5 +1,6 @@
 import { Entity, Column, PrimaryGeneratedColumn, PrimaryColumn,OneToOne,JoinColumn, } from 'typeorm';
 import { Role } from '../../common/enums/roles.enum';
+import { Corredor } from './corredor.entity';
 
 @Entity({ name: 'users_google' })
 export class UsersGoogle {
@@ -32,5 +33,6 @@ export class UsersGoogle {
 
   @Column({ name: 'google_id', unique: true, nullable: true })
   googleId!: string;
-
+  @OneToOne(() => Corredor, (corredor) => corredor.usuarioGoogle)
+  corredor!: Corredor;
 }
