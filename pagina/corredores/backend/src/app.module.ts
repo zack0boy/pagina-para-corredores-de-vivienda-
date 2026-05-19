@@ -7,8 +7,8 @@ import { AppService } from './app.service';
 import { PropiedadModule } from './propiedad/propiedad.module';
 import { ReservasModule } from './reservas/reservas.module';
 import { ContratosModule } from './contratos/contratos.module';
-import { PagosModule } from './pagos/pagos.module';
 import { PropietarioModule } from './propietario/propietario.module';
+import { PagosModule } from './pagos/pagos.module';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 

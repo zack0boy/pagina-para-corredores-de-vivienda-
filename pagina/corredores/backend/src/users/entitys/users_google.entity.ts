@@ -1,6 +1,7 @@
-import { Entity, Column, PrimaryGeneratedColumn, PrimaryColumn,OneToOne,JoinColumn, } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, PrimaryColumn,OneToOne,JoinColumn, OneToMany, } from 'typeorm';
 import { Role } from '../../common/enums/roles.enum';
 import { Corredor } from './corredor.entity';
+import { Reserva } from '../../reservas/entities/reserva.entity';
 
 @Entity({ name: 'users_google' })
 export class UsersGoogle {
@@ -35,4 +36,9 @@ export class UsersGoogle {
   googleId!: string;
   @OneToOne(() => Corredor, (corredor) => corredor.usuarioGoogle)
   corredor!: Corredor;
+  
+  @OneToMany(
+  () => Reserva,(reserva) => reserva.cliente,)
+  reservas!: Reserva[];
+
 }
