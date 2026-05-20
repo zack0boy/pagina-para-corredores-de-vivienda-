@@ -4,6 +4,11 @@ import { CreatePropiedadDto } from './dto/create-propiedad.dto';
 import { UpdatePropiedadDto } from './dto/update-propiedad.dto';
 
 @Controller('propiedad')
+//POST    http://localhost:3000/propiedad
+//GET     http://localhost:3000/propiedad
+//GET     http://localhost:3000/propiedad/:id
+//PATCH   http://localhost:3000/propiedad/:id
+//DELETE  http://localhost:3000/propiedad/:id
 export class PropiedadController {
   constructor(private readonly propiedadService: PropiedadService) {}
 

@@ -2,6 +2,13 @@ import {Controller,Get,Post,Body,Patch,Param,Delete,Request,UseGuards,} from '@n
 import { ReservasService } from './reservas.service';
 import { CreateReservaDto } from './dto/create-reserva.dto';
 import { UpdateReservaDto } from './dto/update-reserva.dto';
+import { JwtAuthGuard } from '../common/guard/jwt.auth.guard';
+
+//POST    http://localhost:3000/reservas
+//GET     http://localhost:3000/reservas
+//GET     http://localhost:3000/reservas/:id
+//PATCH   http://localhost:3000/reservas/:id
+//DELETE  http://localhost:3000/reservas/:id
 
 @Controller('reservas')
 export class ReservasController {
@@ -11,7 +18,9 @@ export class ReservasController {
   ) {}
 
   @Post()
+  @UseGuards(JwtAuthGuard)
   create(
+    
     @Body() createReservaDto: CreateReservaDto,
     @Request() req,
   ) {
@@ -23,11 +32,13 @@ export class ReservasController {
   }
 
   @Get()
+  @UseGuards(JwtAuthGuard)
   findAll() {
     return this.reservasService.findAll();
   }
 
   @Get(':id')
+  @UseGuards(JwtAuthGuard)
   findOne(
     @Param('id') id: string,
   ) {

@@ -1,6 +1,9 @@
 import {Controller,Patch,Param,} from '@nestjs/common';
 import { UsersService } from './users.service';
 
+//PATCH   http://localhost:3000/users/:id/corredor
+//PATCH   http://localhost:3000/users/:id/google/corredor
+
 @Controller('users')
 export class UsersController {
 
