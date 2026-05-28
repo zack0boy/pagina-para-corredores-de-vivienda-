@@ -7,10 +7,10 @@ import { AppService } from './app.service';
 import { PropiedadModule } from './propiedad/propiedad.module';
 import { ReservasModule } from './reservas/reservas.module';
 import { ContratosModule } from './contratos/contratos.module';
-import { PropietarioModule } from './propietario/propietario.module';
 import { PagosModule } from './pagos/pagos.module';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
+import { CuotasModule } from './cuotas/cuotas.module';
 
 @Module({
   imports: [
@@ -21,7 +21,6 @@ import { UsersModule } from './users/users.module';
     ReservasModule,
     ContratosModule,
     PagosModule,
-    PropietarioModule,
     AuthModule, 
     UsersModule,
     
@@ -36,6 +35,15 @@ import { UsersModule } from './users/users.module';
       autoLoadEntities: true,
       synchronize: false,
     }),
+    
+
+    CuotasModule,
+    
+
+    ContratosModule,
+    
+
+    PagosModule,
   ],
   controllers: [AppController],
   providers: [AppService],
