@@ -11,6 +11,7 @@ import { PagosModule } from './pagos/pagos.module';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { CuotasModule } from './cuotas/cuotas.module';
+import { NotificacionModule } from './notificacion/notificacion.module';
 
 @Module({
   imports: [
@@ -44,6 +45,9 @@ import { CuotasModule } from './cuotas/cuotas.module';
     
 
     PagosModule,
+    
+
+    NotificacionModule,
   ],
   controllers: [AppController],
   providers: [AppService],

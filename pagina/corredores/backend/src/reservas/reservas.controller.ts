@@ -4,11 +4,11 @@ import { CreateReservaDto } from './dto/create-reserva.dto';
 import { UpdateReservaDto } from './dto/update-reserva.dto';
 import { JwtAuthGuard } from '../common/guard/jwt.auth.guard';
 
-//POST    http://localhost:3000/reservas
-//GET     http://localhost:3000/reservas
-//GET     http://localhost:3000/reservas/:id
-//PATCH   http://localhost:3000/reservas/:id
-//DELETE  http://localhost:3000/reservas/:id
+//POST    http://localhost:3000/reservas -- crear una nueva reserva (requiere autenticación)
+//GET     http://localhost:3000/reservas -- obtener todas las reservas (requiere autenticación)
+//GET     http://localhost:3000/reservas/:id -- obtener una reserva específica por su ID (requiere autenticación)
+//PATCH   http://localhost:3000/reservas/:id -- actualizar una reserva específica por su ID (requiere autenticación)
+//DELETE  http://localhost:3000/reservas/:id -- eliminar una reserva específica por su ID (requiere autenticación)
 
 @Controller('reservas')
 export class ReservasController {

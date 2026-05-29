@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Usuario} from './entitys/usuario.entity';
-import { UsersGoogle } from './entitys/users_google.entity';
-import { Corredor } from './entitys/corredor.entity';
+import { Usuario} from './entities/usuario.entity';
+import { UsersGoogle } from './entities/users_google.entity';
+import { Corredor } from './entities/corredor.entity';
 import { Role } from '../common/enums/roles.enum';
 @Injectable()
 export class UsersService {
