@@ -28,10 +28,25 @@ export class CloudinaryService {
           resource_type: 'image',
         },
         (error, result) => {
-          if (error || !result) {
-            reject(new BadRequestException('No se pudo subir la imagen a Cloudinary'));
-            return;
-          }
+            if (error) {
+                console.error('CLOUDINARY ERROR:', error);
+
+                reject(
+                new BadRequestException(
+                    JSON.stringify(error),
+                ),
+                );
+                return;
+            }
+
+            if (!result) {
+                reject(
+                new BadRequestException(
+                    'Cloudinary no retornó resultado',
+                ),
+                );
+                return;
+            }
 
           resolve({
             secureUrl: result.secure_url,
