@@ -37,14 +37,14 @@ export class AuthService {
     // crear si no existe
     if (!user) {
 
-      user = await this.usersService.createGoogleUser({
-        googleId: payload.sub,
-        email: payload.email!,
-        nombre: payload.name!,
-        foto: payload.picture,
-        role: Role.CLIENT,
-        estado: 'activo',
-      });
+      user = await this.usersService.create({
+      googleId: payload.sub,
+      email: payload.email!,
+      nombre: payload.name!,
+      foto: payload.picture,
+      role: Role.CLIENT,
+      estado: 'activo',
+    });
 
     }
     

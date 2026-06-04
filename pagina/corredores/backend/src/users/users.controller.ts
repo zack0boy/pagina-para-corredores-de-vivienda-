@@ -21,6 +21,6 @@ export class UsersController {
   assignCorredorGoogle(
   @Param('id') id: string,
   ) {
-  return this.usersService.assignCorredorGoogle(+id);
-}
+    return this.usersService.assignCorredor(+id);
+  }
 }
