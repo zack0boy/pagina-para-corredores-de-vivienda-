@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn, PrimaryColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { PropiedadImagen } from './propiedad-imagen.entity';
 
 @Entity({ name: 'propiedad' })
 export class Propiedad {
@@ -50,4 +51,7 @@ export class Propiedad {
     default: 'disponible',
   })
   estado!: string;
+
+  @OneToMany(() => PropiedadImagen, (imagen) => imagen.propiedad)
+  imagenes!: PropiedadImagen[];
 }

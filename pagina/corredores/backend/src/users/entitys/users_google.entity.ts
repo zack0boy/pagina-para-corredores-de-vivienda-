@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, PrimaryColumn,OneToOne,JoinColumn, OneToMany, } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn, OneToMany } from 'typeorm';
 import { Role } from '../../common/enums/roles.enum';
 import { Corredor } from './corredor.entity';
 import { Reserva } from '../../reservas/entities/reserva.entity';
@@ -34,6 +34,16 @@ export class UsersGoogle {
 
   @Column({ name: 'google_id', unique: true, nullable: true })
   googleId!: string;
+
+  @Column({ name: 'access_token', nullable: true, type: 'text' })
+  accessToken?: string | null;
+
+  @Column({ name: 'refresh_token', nullable: true, type: 'text' })
+  refreshToken?: string | null;
+
+  @Column({ name: 'token_expiry_date', nullable: true, type: 'timestamp' })
+  tokenExpiryDate?: Date | null;
+
   @OneToOne(() => Corredor, (corredor) => corredor.usuarioGoogle)
   corredor!: Corredor;
   

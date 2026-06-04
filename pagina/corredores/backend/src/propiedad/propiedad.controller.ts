@@ -1,4 +1,5 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe, UploadedFile, UseInterceptors } from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
 import { PropiedadService } from './propiedad.service';
 import { CreatePropiedadDto } from './dto/create-propiedad.dto';
 import { UpdatePropiedadDto } from './dto/update-propiedad.dto';
@@ -11,6 +12,15 @@ import { UpdatePropiedadDto } from './dto/update-propiedad.dto';
 //DELETE  http://localhost:3000/propiedad/:id
 export class PropiedadController {
   constructor(private readonly propiedadService: PropiedadService) {}
+
+  @Post(':id/imagen')
+  @UseInterceptors(FileInterceptor('file'))
+  uploadImage(
+    @Param('id', ParseIntPipe) id: number,
+    @UploadedFile() file: Express.Multer.File,
+  ) {
+    return this.propiedadService.subirImagen(id, file);
+  }
 
   @Post()
   create(@Body() createPropiedadDto: CreatePropiedadDto) {

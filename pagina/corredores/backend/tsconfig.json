@@ -21,6 +21,6 @@
     "strictBindCallApply": false,
     "noFallthroughCasesInSwitch": false,
     "ignoreDeprecations": "5.0",
-     "types": ["node","jest"]
+     "types": ["node","jest","multer"]
   }
 }

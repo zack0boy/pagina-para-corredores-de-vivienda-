@@ -1,9 +1,11 @@
-import {Injectable,NotFoundException} from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreatePropiedadDto } from './dto/create-propiedad.dto';
 import { UpdatePropiedadDto } from './dto/update-propiedad.dto';
 import { Propiedad } from './entities/propiedad.entity';
+import { PropiedadImagen } from './entities/propiedad-imagen.entity';
+import { CloudinaryService } from '../cloudinary/cloudinary.service';
 
 @Injectable()
 export class PropiedadService {
@@ -11,6 +13,9 @@ export class PropiedadService {
   constructor(
     @InjectRepository(Propiedad)
     private propiedadRepository: Repository<Propiedad>,
+    @InjectRepository(PropiedadImagen)
+    private readonly propiedadImagenRepository: Repository<PropiedadImagen>,
+    private readonly cloudinaryService: CloudinaryService,
   ) {}
 
   create(createPropiedadDto: CreatePropiedadDto) {
@@ -73,5 +78,22 @@ export class PropiedadService {
     return {
       message: 'Propiedad eliminada',
     };
+  }
+
+  async subirImagen(
+    id: number,
+    file: Express.Multer.File,
+  ) {
+    const propiedad = await this.findOne(id);
+
+    const uploadedImage = await this.cloudinaryService.uploadImage(file, 'propiedades');
+
+    const imagen = this.propiedadImagenRepository.create({
+      propiedad,
+      urlImagen: uploadedImage.secureUrl,
+      publicId: uploadedImage.publicId,
+    });
+
+    return this.propiedadImagenRepository.save(imagen);
   }
 }

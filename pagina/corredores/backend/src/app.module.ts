@@ -4,46 +4,35 @@ import { AppController } from './app.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppService } from './app.service';
 
-import { PropiedadModule } from './propiedad/propiedad.module';
-import { ReservasModule } from './reservas/reservas.module';
-import { ContratosModule } from './contratos/contratos.module';
-import { PagosModule } from './pagos/pagos.module';
 import { AuthModule } from './auth/auth.module';
-import { UsersModule } from './users/users.module';
-import { CuotasModule } from './cuotas/cuotas.module';
+import { GoogleCalendarModule } from './google-calendar/google-calendar.module';
+import { CloudinaryModule } from './cloudinary/cloudinary.module';
+
+// Módulos modularizados (arquitectura nueva)
+import { UserModule } from './modules/user/user.module';
+import { PropertyModule } from './modules/property/property.module';
+import { TransactionModule } from './modules/transaction/transaction.module';
+import { SystemModule } from './modules/system/system.module';
+import { typeormConfig } from './database/typeorm.config';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
-    isGlobal: true,
+      isGlobal: true,
     }),
-    PropiedadModule,
-    ReservasModule,
-    ContratosModule,
-    PagosModule,
-    AuthModule, 
-    UsersModule,
-    
+    // Configuración de TypeORM con TypeOrmModule.forRootAsync
+    TypeOrmModule.forRootAsync(typeormConfig),
 
-    TypeOrmModule.forRoot({
-      type: process.env.DB_TYPE as 'postgres',
-      host: process.env.DB_HOST,
-      port: parseInt(process.env.DB_PORT || '5432'),
-      username: process.env.DB_USERNAME,
-      password: process.env.DB_PASSWORD,
-      database: process.env.DB_NAME,
-      autoLoadEntities: true,
-      synchronize: false,
-    }),
-    
+    // Módulos de infraestructura
+    AuthModule,
+    GoogleCalendarModule,
+    CloudinaryModule,
 
-    CuotasModule,
-    
-
-    ContratosModule,
-    
-
-    PagosModule,
+    // Módulos de negocio (arquitectura nueva)
+    UserModule,
+    PropertyModule,
+    TransactionModule,
+    SystemModule,
   ],
   controllers: [AppController],
   providers: [AppService],
