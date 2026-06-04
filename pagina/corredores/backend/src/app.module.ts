@@ -1,58 +1,52 @@
 import { ConfigModule } from '@nestjs/config';
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
+
+import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
+import { typeormConfig } from './database/typeorm.config';
+
+// Infraestructura
 import { AuthModule } from './auth/auth.module';
-<<<<<<< HEAD
 import { GoogleCalendarModule } from './google-calendar/google-calendar.module';
 import { CloudinaryModule } from './cloudinary/cloudinary.module';
 
-// Módulos modularizados (arquitectura nueva)
+// Arquitectura nueva
 import { UserModule } from './modules/user/user.module';
 import { PropertyModule } from './modules/property/property.module';
 import { TransactionModule } from './modules/transaction/transaction.module';
 import { SystemModule } from './modules/system/system.module';
-import { typeormConfig } from './database/typeorm.config';
-=======
+
+// Arquitectura antigua (todavía existente)
 import { UsersModule } from './users/users.module';
 import { CuotasModule } from './cuotas/cuotas.module';
 import { NotificacionModule } from './notificacion/notificacion.module';
->>>>>>> 0349e4f84f301bb01d16d3c44f51bc9f3f59bd93
 
 @Module({
   imports: [
-    ConfigModule.forRoot({
-      isGlobal: true,
-    }),
-    // Configuración de TypeORM con TypeOrmModule.forRootAsync
-    TypeOrmModule.forRootAsync(typeormConfig),
+  ConfigModule.forRoot({
+    isGlobal: true,
+  }),
 
-    // Módulos de infraestructura
-    AuthModule,
-    GoogleCalendarModule,
-    CloudinaryModule,
+  TypeOrmModule.forRootAsync(typeormConfig),
 
-<<<<<<< HEAD
-    // Módulos de negocio (arquitectura nueva)
-    UserModule,
-    PropertyModule,
-    TransactionModule,
-    SystemModule,
-=======
-    CuotasModule,
-    
+  // Infraestructura
+  AuthModule,
+  GoogleCalendarModule,
+  CloudinaryModule,
 
-    ContratosModule,
-    
+  // Arquitectura nueva
+  UserModule,
+  PropertyModule,
+  TransactionModule,
+  SystemModule,
 
-    PagosModule,
-    
-
-    NotificacionModule,
->>>>>>> 0349e4f84f301bb01d16d3c44f51bc9f3f59bd93
-  ],
+  // Arquitectura antigua
+  UsersModule,
+  CuotasModule,
+  NotificacionModule,
+],
   controllers: [AppController],
   providers: [AppService],
 })

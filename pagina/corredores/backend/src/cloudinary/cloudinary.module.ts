@@ -3,6 +3,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { v2 as cloudinary } from 'cloudinary';
 
 import { CloudinaryService } from './cloudinary.service';
+import { CloudinaryController } from './cloudinary.controller';
 
 export const CLOUDINARY = 'CLOUDINARY';
 
@@ -32,5 +33,6 @@ export const CLOUDINARY = 'CLOUDINARY';
     },
   ],
   exports: [CloudinaryService],
+  controllers: [CloudinaryController],
 })
 export class CloudinaryModule {}

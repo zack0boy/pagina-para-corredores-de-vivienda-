@@ -1,8 +1,21 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToOne, OneToMany, Unique } from 'typeorm';
-import { RolUsuario, EstadoGeneral } from '../../../common/enums/estado.enum';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  CreateDateColumn,
+  UpdateDateColumn,
+  OneToOne,
+  OneToMany,
+  Unique,
+} from 'typeorm';
+
+import { EstadoGeneral, RolUsuario } from '../../../common/enums/estado.enum';
+import { Role } from '../../../common/enums/roles.enum';
+
 import { Cliente } from './cliente.entity';
 import { Corredor } from './corredor.entity';
 import { UsersGoogle } from './users-google.entity';
+
 import { Notificacion } from '../../system/entities/notificacion.entity';
 import { HistorialCambios } from '../../system/entities/historial-cambios.entity';
 
