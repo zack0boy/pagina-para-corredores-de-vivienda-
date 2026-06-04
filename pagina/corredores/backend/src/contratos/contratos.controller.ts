@@ -3,6 +3,12 @@
     import { CreateContratoDto } from './dto/create-contrato.dto';
     import { UpdateContratoDto } from './dto/update-contrato.dto';
 
+    //POST   http://localhost:3000/contratos -- crear un nuevo contrato
+    //GET    http://localhost:3000/contratos -- obtener todos los contratos
+    //GET    http://localhost:3000/contratos/1 -- obtener un contrato por su ID
+    //PATCH  http://localhost:3000/contratos/1 -- actualizar un contrato por su ID
+    //DELETE http://localhost:3000/contratos/1 -- eliminar un contrato por su ID
+    
     @Controller('contratos')
     export class ContratosController {
       constructor(private readonly contratosService: ContratosService) {}

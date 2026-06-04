@@ -3,6 +3,12 @@ import { PagosService } from './pagos.service';
 import { CreatePagoDto } from './dto/create-pago.dto';
 import { UpdatePagoDto } from './dto/update-pago.dto';
 
+//POST   http://localhost:3000/pagos -- crear un nuevo pago
+//GET    http://localhost:3000/pagos -- obtener todos los pagos
+//GET    http://localhost:3000/pagos/1 -- obtener un pago por su ID
+//PATCH  http://localhost:3000/pagos/1 -- actualizar un pago por su ID
+//DELETE http://localhost:3000/pagos/1 -- eliminar un pago por su ID
+
 @Controller('pagos')
 export class PagosController {
   constructor(private readonly pagosService: PagosService) {}

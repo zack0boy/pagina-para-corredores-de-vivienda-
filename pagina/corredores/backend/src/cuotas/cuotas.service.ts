@@ -44,19 +44,54 @@ export class CuotasService {
     return this.cuotaRepository.save(cuota);
   }
 
-  findAll() {
-    return `This action returns all cuotas`;
+  async findAll() {
+
+  return this.cuotaRepository.find({
+    relations: ['contrato'],
+  });
+}
+
+async findOne(id: number) {
+
+  const cuota =
+    await this.cuotaRepository.findOne({
+      where: {
+        idCuota: id,
+      },
+      relations: ['contrato'],
+    });
+
+  if (!cuota) {
+
+    throw new NotFoundException(
+      'Cuota no encontrada',
+    );
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} cuota`;
-  }
+  return cuota;
+}
 
-  update(id: number, updateCuotaDto: UpdateCuotaDto) {
-    return `This action updates a #${id} cuota`;
-  }
+async update(
+  id: number,
+  updateCuotaDto: UpdateCuotaDto,
+) {
 
-  remove(id: number) {
-    return `This action removes a #${id} cuota`;
-  }
+  await this.cuotaRepository.update(
+    id,
+    updateCuotaDto,
+  );
+
+  return {
+    message: 'Cuota actualizada',
+  };
+}
+
+async remove(id: number) {
+
+  await this.cuotaRepository.delete(id);
+
+  return {
+    message: 'Cuota eliminada',
+  };
+}
 }

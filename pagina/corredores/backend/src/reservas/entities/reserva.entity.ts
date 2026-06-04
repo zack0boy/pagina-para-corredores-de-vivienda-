@@ -1,5 +1,5 @@
 import {Entity,Column,PrimaryGeneratedColumn,ManyToOne,JoinColumn,} from 'typeorm';
-import { UsersGoogle } from '../../users/entitys/users_google.entity';
+import { UsersGoogle } from '../../users/entities/users_google.entity';
 
 @Entity({ name: 'reserva' })
 export class Reserva {
