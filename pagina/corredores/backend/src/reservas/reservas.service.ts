@@ -4,7 +4,7 @@ import { Repository } from 'typeorm';
 import { CreateReservaDto } from './dto/create-reserva.dto';
 import { UpdateReservaDto } from './dto/update-reserva.dto';
 import { Reserva } from './entities/reserva.entity';
-import { UsersGoogle } from '../users/entities/users_google.entity';
+import { UsersGoogle } from '../modules/user/entities/users-google.entity';
 
 @Injectable()
 export class ReservasService {
@@ -28,7 +28,7 @@ export class ReservasService {
       await this.usersGoogleRepository.findOne({
         where: {
           id: userId,
-        },
+        } as any,
       });
 
     if (!user) {

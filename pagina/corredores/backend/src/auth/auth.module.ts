@@ -5,13 +5,13 @@ import type { StringValue } from 'ms';
 
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.services';
-import { UsersModule } from '../users/users.module';
 import { JwtStrategy } from './jwt.strategy';
 import { PassportModule } from '@nestjs/passport/dist/passport.module';
+import { UserModule } from '../modules/user/user.module';
 @Module({
   imports: [
     ConfigModule,
-    UsersModule,
+    UserModule,
     PassportModule,
     JwtModule.registerAsync({
       imports: [ConfigModule],

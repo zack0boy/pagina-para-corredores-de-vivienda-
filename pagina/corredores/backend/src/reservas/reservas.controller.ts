@@ -1,8 +1,8 @@
 import {Controller,Get,Post,Body,Patch,Param,Delete,Request,UseGuards,} from '@nestjs/common';
+import { JwtAuthGuard } from '../common/guards/jwt-auth.guard';
 import { ReservasService } from './reservas.service';
 import { CreateReservaDto } from './dto/create-reserva.dto';
 import { UpdateReservaDto } from './dto/update-reserva.dto';
-import { JwtAuthGuard } from '../common/guard/jwt.auth.guard';
 
 //POST    http://localhost:3000/reservas -- crear una nueva reserva (requiere autenticación)
 //GET     http://localhost:3000/reservas -- obtener todas las reservas (requiere autenticación)

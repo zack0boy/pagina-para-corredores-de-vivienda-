@@ -4,8 +4,7 @@ import { UpdateNotificacionDto } from './dto/update-notificacion.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Notificacion } from './entities/notificacion.entity';
-import { Usuario } from '../users/entities/usuario.entity';
-import { UsersGoogle } from '../users/entities/users_google.entity';
+import { UsersGoogle } from '../modules/user/entities/users-google.entity';
 
 @Injectable()
 export class NotificacionService {
@@ -27,7 +26,7 @@ export class NotificacionService {
 
     const usuario =
       await this.usersGoogleRepository.findOneBy({
-        id: dto.idUsuario,
+        idUsuario: dto.idUsuario,
       });
 
     if (!usuario) {

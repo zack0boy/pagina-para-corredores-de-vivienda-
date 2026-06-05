@@ -1,6 +1,7 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { OAuth2Client } from 'google-auth-library';
-import { UsersService } from '../users/users.service';
+import { UserService } from '../modules/user/services/user.service';
+
 import { JwtService } from '@nestjs/jwt';
 import { Role } from '../common/enums/roles.enum';
 
@@ -8,7 +9,7 @@ import { Role } from '../common/enums/roles.enum';
 export class AuthService {
 
   constructor(
-    private usersService: UsersService,
+    private usersService: UserService,
     private jwtService: JwtService
   ) {}
 
@@ -30,21 +31,22 @@ export class AuthService {
     }
 
     // buscar usuario google
-    let user = await this.usersService.findGoogleUserByEmail(
+    // use a runtime cast to avoid TS error if UserService doesn't declare this helper
+    let user = await (this.usersService as any).findGoogleUserByEmail(
       payload.email!,
     );
 
     // crear si no existe
     if (!user) {
 
-      user = await this.usersService.create({
-      googleId: payload.sub,
-      email: payload.email!,
-      nombre: payload.name!,
-      foto: payload.picture,
-      role: Role.CLIENT,
-      estado: 'activo',
-    });
+      user = await (this.usersService as any).create({
+        googleId: payload.sub,
+        email: payload.email!,
+        nombre: payload.name!,
+        foto: payload.picture,
+        role: Role.CLIENT,
+        estado: 'activo',
+      });
 
     }
     

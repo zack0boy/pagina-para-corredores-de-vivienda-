@@ -3,7 +3,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule, getRepositoryToken } from '@nestjs/typeorm';
 import { google } from 'googleapis';
 
-import { UsersGoogle } from '../users/entities/users_google.entity';
+import { UsersGoogle } from '../modules/user/entities/users-google.entity';
 import { GoogleCalendarService } from './google-calendar.service';
 
 export const GOOGLE_OAUTH_CLIENT = 'GOOGLE_OAUTH_CLIENT';

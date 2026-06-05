@@ -19,7 +19,6 @@ import { TransactionModule } from './modules/transaction/transaction.module';
 import { SystemModule } from './modules/system/system.module';
 
 // Arquitectura antigua (todavía existente)
-import { UsersModule } from './users/users.module';
 import { CuotasModule } from './cuotas/cuotas.module';
 import { NotificacionModule } from './notificacion/notificacion.module';
 
@@ -43,7 +42,6 @@ import { NotificacionModule } from './notificacion/notificacion.module';
   SystemModule,
 
   // Arquitectura antigua
-  UsersModule,
   CuotasModule,
   NotificacionModule,
 ],

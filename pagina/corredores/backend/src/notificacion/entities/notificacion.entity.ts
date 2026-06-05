@@ -1,6 +1,5 @@
 import {Entity,Column,PrimaryGeneratedColumn,ManyToOne,JoinColumn,} from 'typeorm';
-import { Usuario } from '../../users/entities/usuario.entity';
-import { UsersGoogle } from '../../users/entities/users_google.entity';
+import { UsersGoogle } from '../../modules/user/entities/users-google.entity';
 @Entity({ name: 'notificacion' })
 export class Notificacion {
 

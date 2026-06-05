@@ -1,5 +1,5 @@
 import {Entity,Column,PrimaryGeneratedColumn,ManyToOne,JoinColumn,} from 'typeorm';
-import { UsersGoogle } from '../../users/entities/users_google.entity';
+import { UsersGoogle } from '../../modules/user/entities/users-google.entity';
 
 @Entity({ name: 'reserva' })
 export class Reserva {
@@ -31,7 +31,6 @@ export class Reserva {
 
   @ManyToOne(
     () => UsersGoogle,
-    (user) => user.reservas,
   )
   @JoinColumn({
     name: 'id_cliente',
