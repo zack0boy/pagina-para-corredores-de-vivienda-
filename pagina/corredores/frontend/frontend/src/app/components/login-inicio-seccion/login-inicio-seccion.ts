@@ -2,6 +2,7 @@ import { AfterViewInit, Component, OnInit, inject } from '@angular/core';
 import { ConfigService } from '../../services/config.service';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { ApiService } from '../../services/api.service';
 
 declare const google: any;
 
@@ -20,6 +21,7 @@ declare global {
 export class LoginInicioSeccion implements OnInit, AfterViewInit {
   private configService = inject(ConfigService);
   private fb = inject(FormBuilder);
+  private apiService = inject(ApiService);
 
   company = this.configService.getCompany();
   loginForm: FormGroup;
@@ -47,34 +49,53 @@ export class LoginInicioSeccion implements OnInit, AfterViewInit {
     });
   }
 
-  ngAfterViewInit(): void {
-    if (typeof google === 'undefined') {
-      console.warn('Google Identity Services no está cargado.');
-      return;
-    }
+ ngAfterViewInit(): void {
 
-    if (!window.googleIdentityInitialized) {
-      google.accounts.id.initialize({
-        client_id: '957495637126-gpvoqbqfb1lrs4pf5fieph8pturvorlf.apps.googleusercontent.com',
-        callback: (response: any) => {
-          this.googleUser = this.decodeGoogleCredential(response.credential);
+  if (typeof google === 'undefined') {
+    console.warn('Google Identity Services no está cargado.');
+    return;
+  }
 
-          console.log('Respuesta completa de Google:', response);
-          console.log('Usuario de Google:', this.googleUser);
-          console.log('Usuario de Google en tabla:');
-          console.table(this.googleUser ?? {});
-        }
-      });
+  if (!window.googleIdentityInitialized) {
 
-      window.googleIdentityInitialized = true;
-    }
+    google.accounts.id.initialize({
+      client_id: '957495637126-gpvoqbqfb1lrs4pf5fieph8pturvorlf.apps.googleusercontent.com',
 
-    google.accounts.id.renderButton(document.getElementById('google-btn'), {
+      callback: (response: any) => {
+
+        this.googleUser = this.decodeGoogleCredential(
+          response.credential,
+        );
+
+        console.log('Respuesta completa de Google:', response);
+        console.log('Usuario de Google:', this.googleUser);
+
+        this.apiService.googleLogin(
+          response.credential,
+        ).subscribe({
+          next: (res) => {
+            console.log('Respuesta NestJS:', res);
+          },
+          error: (err) => {
+            console.error('Error NestJS:', err);
+          },
+        });
+
+      },
+    });
+
+    window.googleIdentityInitialized = true;
+  }
+
+  google.accounts.id.renderButton(
+    document.getElementById('google-btn'),
+    {
       theme: 'outline',
       size: 'large',
-      width: 300
-    });
-  }
+      width: 300,
+    },
+  );
+}
 
   onLogin() {
     const { email, password } = this.loginForm.value;
